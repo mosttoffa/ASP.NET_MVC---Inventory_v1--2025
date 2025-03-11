@@ -1,0 +1,53 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.js"></script>
+    <style>
+        .clsLoginWrapper {
+            height: 500px;
+            width: 400px;
+            position: fixed;
+            left: 0px;
+            right: 0px;
+            top: 0px;
+            bottom: 0px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="dvLoginWrapper" class="clsLoginWrapper">
+
+        <div style="position: absolute; height: 300px; width: 90%;  left: 0px; right: 0px; top: 0px; bottom: 0px; margin: auto">
+
+            <div class="card">
+                <div class="card-header" style="text-align:center">
+                    Login
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" placeholder="username">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="username" placeholder="password">
+                    </div>
+                    <a href="#" class="btn btn-primary">Submit</a>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+
+</body>
+</html>

@@ -9,7 +9,7 @@ namespace Inventory_v1.Controllers
     public class AuthController : Controller
     {
         // GET: Auth
-        public ActionResult Index()
+        public ActionResult Login()
         {
             return View();
         }
