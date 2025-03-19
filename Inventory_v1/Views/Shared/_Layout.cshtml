@@ -6,6 +6,27 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
+
+    @*Always open to Login page if user is not logged in*@
+    @{
+        string SessionUser = "";
+        if (Session["Username"] != null)
+        {
+            SessionUser = Session["Username"].ToString();
+        }
+    }
+
+    <script>
+     var username = '@SessionUser';
+     if (username == '') {
+         window.location.href = '@Url.Action("Login", "Auth")';     // Redirect to About page after login successfully
+     }
+    </script>
+
+
+
+
 </head>
 <body>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
