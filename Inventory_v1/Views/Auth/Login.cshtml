@@ -17,19 +17,31 @@
             width: 400px;
             position: fixed;
             left: 0px;
-            right: 0px; 
+            right: 0px;
             top: 0px;
             bottom: 0px;
             margin: auto;
         }
     </style>
 
+    @{              
+        string SessionUser = "";
+        if (Session["Username"] != null)
+        {
+            SessionUser = Session["Username"].ToString();
+        }
+    }
 
-    <script>       // Show Login Success popup message and redirect to About or any page i want  
-        var username = '@ViewBag.Username';
+
+    <script>
+       // Show Login Success popup message and redirect to About or any page i want
+        var username = '@Session["Username"].ToString()';
         if (username != '') {
             alert("Login Success for user : " + username);
-            window.location.href = '@Url.Action("About", "Home")';     // Redirect to About page after login successfully 
+            window.location.href = '@Url.Action("About", "Home")';     // Redirect to About page after login successfully
+        }
+        else {
+            alert("Login Failed. User: " + username);
         }
     </script>
 
