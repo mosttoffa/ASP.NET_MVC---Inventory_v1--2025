@@ -5,7 +5,6 @@ using System.Web;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
-using System.Security.Cryptography.X509Certificates;
 
 namespace Inventory_v1.Models
 {
@@ -15,13 +14,17 @@ namespace Inventory_v1.Models
         // property declaration way
         public int id { get; set; }  // property declare kora hoise 
         public string Name { get; set; }  // property declare kora hoise 
-        public string Age { get; set; }  // property declare kora hoise 
+        public int Age { get; set; }  // property declare kora hoise 
         public string Password { get; set; }  // property declare kora hoise 
+        public string ServiceType { get; set; }  // property declare kora hoise 
+
         public string Role { get; set; }  // property declare kora hoise 
 
+        public string DashBoardPageURL { get; set; }  // property declare kora hoise
 
-        // ekta function create kori
-        public DataTable ValidateMemberAsDataTable(string username, string password)                                // function er name ValidateMember
+
+        // ekta function create kori jeta amr database er sathe connect kore
+        public DataTable ValidateMemberAsDataTable(string Username, string Password)                                // function er name ValidateMember
         {
             DataTable dataTable = new DataTable();                          // data table object create kora hoise
 
@@ -39,7 +42,9 @@ namespace Inventory_v1.Models
             // sokol prokar query, calculation amra stored procedure e korbo, database level e korbo  
 
 
-            string CommandText = "select * from DatabaseName where Name='"+ username + "' and Password='"+ password +"' ";
+            string CommandText = "select * from Member where Name='"+ Username + "' and Password='"+ Password +"' ";
+            //string CommandText = "select * from Member";
+
             //sql command
             SqlCommand cmd = new SqlCommand(CommandText, sqlConnection);  // sql command object create kora hoise
             cmd.CommandTimeout = 0;                                       // command timeout 0 kora hoise 
@@ -60,7 +65,10 @@ namespace Inventory_v1.Models
         }
 
 
-        public DataTable ValidateMemberAsDataTableBySP(string username, string password)                                // function er name ValidateMember
+
+
+
+        public DataTable ValidateMemberAsDataTableBySP(string Username, string Password)                                // function er name ValidateMember
         {
             DataTable dataTable = new DataTable();                          // data table object create kora hoise
 
@@ -79,12 +87,12 @@ namespace Inventory_v1.Models
 
             //sql command
             SqlCommand cmd = new SqlCommand("spOst_LstMember", sqlConnection);  //  
-            
+
             cmd.CommandTimeout = 0;                                       // command timeout 0 kora hoise 
             cmd.CommandType = CommandType.StoredProcedure;                // Command type stored procedure 
             cmd.Parameters.Clear();                                       // parameter clear kora hoise 
-            cmd.Parameters.Add(new SqlParameter("@Username", username));  
-            cmd.Parameters.Add(new SqlParameter("@Username", password));
+            cmd.Parameters.Add(new SqlParameter("@Username", Username));
+            cmd.Parameters.Add(new SqlParameter("@Username", Password));
 
             // table data 
             SqlDataAdapter adapter = new SqlDataAdapter(cmd);             // sql data adapter object create kora hoise and command pass kora hoise
@@ -100,7 +108,12 @@ namespace Inventory_v1.Models
 
 
 
-        public List<BaseMember> ValidateMemberAsList(string username, string password)                                // function er name ValidateMember
+
+
+
+
+
+        public List<BaseMember> ValidateMemberAsList(string Username, string Password)                                // function er name ValidateMember
         {
             List<BaseMember> listMember = new List<BaseMember>();               // list object create kora hoise
 
@@ -118,13 +131,12 @@ namespace Inventory_v1.Models
             // sokol prokar query, calculation amra stored procedure e korbo, database level e korbo  
 
 
-            string CommandText = "select * from DatabaseName";
+            string CommandText = "select * from Member";
             //sql command
             SqlCommand cmd = new SqlCommand(CommandText, sqlConnection);  // sql command object create kora hoise
             cmd.CommandTimeout = 0;                                       // command timeout 0 kora hoise 
             cmd.CommandType = CommandType.Text;               // command type text kora hoise
             cmd.Parameters.Clear();                                       // parameter clear kora hoise 
-
 
             // List akare nite caile 
             SqlDataReader reader = cmd.ExecuteReader();                   // sql data reader object create kora hoise 
@@ -136,7 +148,10 @@ namespace Inventory_v1.Models
                     BaseMember objMember = new BaseMember();  // base member class er object create kora hoise
                     objMember.Name = reader["Name"].ToString();  // reader theke data read kora hoise
                     objMember.Password = reader["Password"].ToString();  // reader theke data read kora hoise
-                    objMember.id = Convert.ToInt16(reader["id"].ToString());  // reader theke data read kora hoise
+                    objMember.id = Convert.ToInt16( reader["id"].ToString());  // reader theke data read kora hoise
+                    objMember.Age = Convert.ToInt16(reader["Age"].ToString());  // reader theke data read kora hoise
+                    objMember.ServiceType = reader["ServiceType"].ToString();  // reader theke data read kora hoise
+
                     listMember.Add(objMember);
 
 
