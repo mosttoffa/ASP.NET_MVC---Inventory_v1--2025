@@ -68,7 +68,7 @@ namespace Inventory_v1.Controllers
 
 
 
-
+        // Logout Part
         public ActionResult Logout()     // Logout function
         {
             if (Session["Username"] != null)  // 
