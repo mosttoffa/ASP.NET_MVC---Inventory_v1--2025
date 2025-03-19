@@ -62,9 +62,21 @@ namespace Inventory_v1.Controllers
             }
 
             return View();  // Login page e thakbe
-        }                                                 
-        
+        }
+
         // We can use any one method from above two methods for Login 
+
+
+
+
+        public ActionResult Logout()     // Logout function
+        {
+            if (Session["Username"] != null)  // 
+            {
+                Session.Remove("Username");  
+            }
+            return Redirect(Url.Action("Login", "Auth"));  // Redirect to Login page after Logout
+        }
     }
 
 
