@@ -1,0 +1,92 @@
+﻿
+@using Inventory_v1.Models         @*Importing the namespace for the BaseEquipment model, Path ta dekhiye deowa hoyese*@
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    #tblEquipment {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+        #tblEquipment td, #tblEquipment th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #tblEquipment tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #tblEquipment tr:hover {
+            background-color: #ddd;
+        }
+
+        #tblEquipment th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04AA6D;
+            color: white;
+        }
+</style>
+
+<div class="row">
+    <div class="col col-sm-6">
+        <div style="width:100%">
+            <div style="height: 30px; background: cornsilk; width: 100%; text-align:center; padding:5px; border-radius:5px;">
+                Equipment List
+            </div>
+            <div style="max-height: 400px;  width:100%; overflow:auto">
+
+                @{
+                    BaseEquipment baseEquipment = new BaseEquipment();
+                    List<BaseEquipment> lastEquipment = baseEquipment.ListEquipment();
+                }
+
+                <table id="tblEquipment" style="width:100%">
+                    <tr>
+                        <th>EquipmentID</th>
+                        <th>EquipmentName</th>
+                        <th>Quantity</th>
+                        <th>Stock</th>
+                        <th>EntryDate</th>
+                        <th>ReceiveDate</th>
+                    </tr>
+                    @{
+                        foreach (BaseEquipment obj in lastEquipment)
+                        {
+                            <tr>
+                                <td>@obj.EquipmentID</td>
+                                <td>@obj.EquipmentName</td>
+                                <td>@obj.Quantity</td>
+                                <td>@obj.Stock</td>
+                                <td>@obj.EntryDate</td>
+                                <td>@obj.ReceiveDate</td>
+                            </tr>
+                        }
+                    }
+
+
+
+                </table>
+
+            </div>
+        </div>
+    </div>
+    <div class="col col-sm-6">
+        <div style="width:100%">
+            <div style="height: 30px; background: cornsilk; width: 100%; text-align: center; padding: 5px; border-radius: 5px; ">
+                Caption 2
+            </div>
+            <div style="max-height: 400px;  width:100%; overflow:auto">
+                List 2
+            </div>
+        </div>
+    </div>
+
+</div>
+

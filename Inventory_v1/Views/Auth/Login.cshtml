@@ -37,8 +37,8 @@
        // Show Login Success popup message and redirect to About or any page i want
         var username = '@SessionUser';
         if (username != '') {
-            alert("Login Success for user : " + username);
-            window.location.href = '@Url.Action("About", "Home")';     // Redirect to About page after login successfully
+            //alert("Login Success for user : " + username);
+            window.location.href = '@Url.Action("Index","DashBoard")';     // Redirect to About page after login successfully
         }
         else {
             //alert("Login Failed. User: " + username);

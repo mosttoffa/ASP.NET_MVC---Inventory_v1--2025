@@ -111,8 +111,6 @@ namespace Inventory_v1.Models
 
 
 
-
-
         public List<BaseMember> ValidateMemberAsList(string Username, string Password)                                // function er name ValidateMember
         {
             List<BaseMember> listMember = new List<BaseMember>();               // list object create kora hoise
