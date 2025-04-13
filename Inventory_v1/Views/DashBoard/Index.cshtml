@@ -34,20 +34,43 @@
         }
 </style>
 <script>
+     //Legacy Part
+    //function ShowModal() {
+    //    // Legacy Modal
+    //     document.getElementById("dvOverlay").style.display = "";
+    //     document.getElementById("dvModal").style.display = "";
+    //}
+
+    //function HideModal() {
+    //    // Legacy Modal
+    //    document.getElementById("dvOverlay").style.display = "none";
+    //    document.getElementById("dvModal").style.display = "none";
+    //}
+
+
+    // Dynamic Part
     function ShowModal() {
-        // Legacy Modal
-         document.getElementById("dvOverlay").style.display = "";
-         document.getElementById("dvModal").style.display = "";
-        // Dynamic Modal
-   
+        $('#dvModal').dialog({
+            title: 'Equipment Entry',
+            height: 600,
+            width: 500,
+            modal: true //,
+            //buttons: {
+            //    Cancel: function () {
+            //        dialog.dialog("close");
+            //    },
+            //    ok: function () {
+            //        dialog.dialog("close");
+            //    }
+            //}
+        });
     }
 
     function HideModal() {
-        // Legacy Modal
-        document.getElementById("dvOverlay").style.display = "none";
-        document.getElementById("dvModal").style.display = "none";
-        // Dynamic Modal
+        
     }
+
+
 </script>
 
 
