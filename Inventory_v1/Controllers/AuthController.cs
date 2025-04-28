@@ -58,7 +58,7 @@ namespace Inventory_v1.Controllers
             if (statusValid)
             {
                 Session["Username"] = txtUsername;              // Session e Username store korlam
-                return Redirect(Url.Action("Index", "Home"));  // Redirect to Home page directly after login
+                return Redirect(Url.Action("Index", "DashBoard"));  // Redirect to DashBoard page directly after login
             }
 
             return View();  // Login page e thakbe
