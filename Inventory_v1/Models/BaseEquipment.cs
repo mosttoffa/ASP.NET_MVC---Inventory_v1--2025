@@ -39,7 +39,7 @@ namespace Inventory_v1.Models
             cmd.Parameters.Clear();                                       // parameter clear kora hoise 
 
             // List akare nite caile 
-            SqlDataReader reader = cmd.ExecuteReader();                   // sql data reader object create kora hoise 
+            SqlDataReader reader = cmd.ExecuteReader();          // list data hoile SqlDataReader or data adapter use kore korte hoy 
             if (reader.HasRows)
             {
                 while (reader.Read())
@@ -64,6 +64,47 @@ namespace Inventory_v1.Models
             return ListEquipment;  // username and password admin na hole false return korbe
 
         }
+
+
+
+
+        public int SaveEquipment()                                       // function er name ValidateMember
+        {
+
+            string Connstring = ConfigurationManager.ConnectionStrings["Connstring"].ToString();    // Connection string ta amra web.config file theke nitechi
+
+            //sql connection
+            SqlConnection sqlConnection = new SqlConnection(Connstring);  // sql connection object create kora hoise and connection string pass kora hoise
+            sqlConnection.Open();                                         // connection open kora hoise 
+
+            // sokol prokar query, calculation amra stored procedure e korbo, database level e korbo  
+
+            //string CommandText = "sp_LstEquipments";   // stored procedure e korte caile 
+
+            string CommandText = "select * from Equipments";
+            //sql command
+            SqlCommand cmd = new SqlCommand(CommandText, sqlConnection);  // sql command object create kora hoise
+            cmd.CommandTimeout = 0;                                       // command timeout 0 kora hoise 
+            cmd.CommandType = CommandType.Text;                           // command type text kora hoise
+            //cmd.CommandType = CommandType.StoredProcedure;             // command type text use na kore porobortite StoreProcedure korte hobe , jokhn Store Procedure use korbo
+            cmd.Parameters.Clear();                                       // parameter clear kora hoise 
+            
+            cmd.Parameters.Add(new SqlParameter("@EquipmentID", this.EquipmentID));         // parameter add kora hoise
+            cmd.Parameters.Add(new SqlParameter("@EquipmentName", this.EquipmentName));         // parameter add kora hoise
+            cmd.Parameters.Add(new SqlParameter("@Quantity", this.Quantity));              // parameter add kora hoise
+            cmd.Parameters.Add(new SqlParameter("@EntryDate", this.EntryDate));             // parameter add kora hoise
+            cmd.Parameters.Add(new SqlParameter("@ReceiveDate", this.ReceiveDate));           // parameter add kora hoise
+
+            int returnvalue = cmd.ExecuteNonQuery();     // e ExecuteNonQuery er maddhome amra data insert, update, delete korte pari
+
+            cmd.Dispose();          // command dispose kora hoise
+            sqlConnection.Close();  // connection close kora hoise
+
+
+            return returnvalue;  // username and password admin na hole false return korbe
+
+        }
+
 
 
     }

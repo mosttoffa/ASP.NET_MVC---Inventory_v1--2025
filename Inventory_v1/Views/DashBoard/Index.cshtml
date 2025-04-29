@@ -47,6 +47,12 @@
     //    document.getElementById("dvModal").style.display = "none";
     //}
 
+    function UpdateItem(equipmentid) {
+        ShowModal();
+        $('#hdEquipmentID').val(equipmentid);  //Hidden field er value set kora hoyeche
+        $('#btnSubmit').val("Update");  //Button er value set kora hoyeche
+    }
+
 
     // Dynamic Part
     function ShowModal() {
@@ -67,9 +73,13 @@
     }
 
     function HideModal() {
-        
     }
 
+    var OutMessage = "@ViewBag.OutMessage";         @*ViewBag er madhome message ta pass kora hoyeche, jate page ta load holei message ta dekhay*@
+    if (OutMessage != "") {
+        alert(OutMessage);
+        OutMessage = "";
+    }
 
 </script>
 
@@ -79,7 +89,7 @@
         <div style="width:100%">
             <div style="height: 30px; background: cornsilk; width: 100%; text-align:center; padding:5px; border-radius:5px;">
                 Equipment List
-                <input type="button" value="new" style="float:right" onclick="ShowModal()" />
+                <input type="button" value="new" style="float:right" onclick="ShowModal();$('#btnSubmit').val('Save');" />
 
             </div>
             <div style="max-height: 400px;  width:100%; overflow:auto">
@@ -135,7 +145,6 @@
 
 
 @*// Partial page ta main Index er sathe connect korte hobe, jate page ta load holei partial page ta load hoye jabe.*@
-
 @Html.Partial("_PartialEquipmentEntry");
 
 

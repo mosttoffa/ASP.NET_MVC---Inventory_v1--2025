@@ -19,7 +19,7 @@ namespace Inventory_v1.Controllers
         //public ActionResult Login(string txtUsername, string txtPassword)   // Username and Password view connected here from Login design page
         //{
         //    ViewBag.Username = txtUsername;       // ViewBag e Username in hoilo
-        //    return View();                      // after Login successful there will be a Login successful popup then if press Ok then it will redirect to Home page
+        //    return View();                        // after Login successful there will be a Login successful popup then if press Ok then it will redirect to Home page
         //}
         public ActionResult Login(string txtUsername, string txtPassword)   // Username and Password view connected here from Login design page
         {
@@ -31,17 +31,17 @@ namespace Inventory_v1.Controllers
 
             //if (dt.Rows.Count > 0)  // Jodi data table er row count 0 er beshi hoy
             //{
-            //    Session["Username"] = txtUsername;              // Session e Username store korlam
-            //    return Redirect(Url.Action("Index", "Home"));  // Redirect to Home page directly after login
+            //    Session["Username"] = txtUsername;                // Session e Username store korlam
+            //    return Redirect(Url.Action("Index", "Home"));     // Redirect to Home page directly after login
             //}
             //else
             //{
-            //    ViewBag.Message = "Invalid Username or Password";  // Jodi Username or Password invalid hoy tahole ei message ta show korbe
-            //    return View();                                    // Login page e thakbe
+            //    ViewBag.Message = "Invalid Username or Password";     // Jodi Username or Password invalid hoy tahole ei message ta show korbe
+            //    return View();                                        // Login page e thakbe
             //}
 
-            ////Session["Username"] = txtUsername;              // Session e Username store korlam
-            ////return Redirect(Url.Action("Index", "Home"));  // Redirect to Home page directly after login
+            ////Session["Username"] = txtUsername;                  // Session e Username store korlam
+            ////return Redirect(Url.Action("Index", "Home"));       // Redirect to Home page directly after login
             ///
 
 
@@ -50,14 +50,14 @@ namespace Inventory_v1.Controllers
             bool statusValid = false;  // statusValid false kora hoise
             foreach (BaseMember baseMember1 in lstMember)
             {
-                if (baseMember1.Name == txtUsername && baseMember1.Password == txtPassword)  // Jodi Username and Password match hoy
+                if (baseMember1.Name == txtUsername && baseMember1.Password == txtPassword)     // Jodi Username and Password match hoy
                 {
                     statusValid = true;
                 }
             }
             if (statusValid)
             {
-                Session["Username"] = txtUsername;              // Session e Username store korlam
+                Session["Username"] = txtUsername;                  // Session e Username store korlam
                 return Redirect(Url.Action("Index", "DashBoard"));  // Redirect to DashBoard page directly after login
             }
 
@@ -69,9 +69,9 @@ namespace Inventory_v1.Controllers
 
 
         // Logout Part
-        public ActionResult Logout()     // Logout function
+        public ActionResult Logout()            // Logout function
         {
-            if (Session["Username"] != null)  // 
+            if (Session["Username"] != null)    
             {
                 Session.Remove("Username");  
             }
