@@ -12,13 +12,13 @@ namespace Inventory_v1.Models
 	{
 
         // property declaration way
-        public int id { get; set; }  // property declare kora hoise 
+        public int id { get; set; }       // property declare kora hoise 
         public string Name { get; set; }  // property declare kora hoise 
-        public int Age { get; set; }  // property declare kora hoise 
-        public string Password { get; set; }  // property declare kora hoise 
+        public int Age { get; set; }      // property declare kora hoise 
+        public string Password { get; set; }    // property declare kora hoise 
         public string ServiceType { get; set; }  // property declare kora hoise 
 
-        public string Role { get; set; }  // property declare kora hoise 
+        public string Role { get; set; }         // property declare kora hoise 
 
         public string DashBoardPageURL { get; set; }  // property declare kora hoise
 
@@ -26,7 +26,7 @@ namespace Inventory_v1.Models
         // ekta function create kori jeta amr database er sathe connect kore
         public DataTable ValidateMemberAsDataTable(string Username, string Password)                                // function er name ValidateMember
         {
-            DataTable dataTable = new DataTable();                          // data table object create kora hoise
+            DataTable dataTable = new DataTable();                      // data table object create kora hoise
 
             // Connection string theke use korte caile 
             string Connstring = ConfigurationManager.ConnectionStrings["Connstring"].ToString();    // Connection string ta amra web.config file theke nitechi
@@ -48,13 +48,13 @@ namespace Inventory_v1.Models
             //sql command
             SqlCommand cmd = new SqlCommand(CommandText, sqlConnection);  // sql command object create kora hoise
             cmd.CommandTimeout = 0;                                       // command timeout 0 kora hoise 
-            cmd.CommandType = CommandType.Text;               // command type text kora hoise
+            cmd.CommandType = CommandType.Text;                           // command type text kora hoise
             cmd.Parameters.Clear();                                       // parameter clear kora hoise 
 
 
             // table data 
             SqlDataAdapter adapter = new SqlDataAdapter(cmd);             // sql data adapter object create kora hoise and command pass kora hoise
-            adapter.Fill(dataTable);                                     // data table fill kora hoise
+            adapter.Fill(dataTable);                                      // data table fill kora hoise
             
             cmd.Dispose();          // command dispose kora hoise
             sqlConnection.Close();  // connection close kora hoise
@@ -86,7 +86,7 @@ namespace Inventory_v1.Models
             // sokol prokar query, calculation amra stored procedure e korbo, database level e korbo  
 
             //sql command
-            SqlCommand cmd = new SqlCommand("spOst_LstMember", sqlConnection);  //  
+            SqlCommand cmd = new SqlCommand("spOst_LstMember", sqlConnection);  //  used store procedure
 
             cmd.CommandTimeout = 0;                                       // command timeout 0 kora hoise 
             cmd.CommandType = CommandType.StoredProcedure;                // Command type stored procedure 

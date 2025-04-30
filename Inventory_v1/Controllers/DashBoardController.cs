@@ -61,6 +61,7 @@ namespace Inventory_v1.Controllers
                 
             }
 
+
             if (btnSubmit == "Save")
             {
                 baseEquipment.EquipmentName = formCollection["txtEquipmentName"].ToString();
@@ -100,6 +101,47 @@ namespace Inventory_v1.Controllers
         //{
         //    return View();
         //}
+
+
+        public ActionResult NewEquipmentAssignment()
+        {
+            BaseEquipment baseEquipment = new BaseEquipment();
+            List<BaseEquipment> lstEquipment = baseEquipment.ListEquipment();
+
+
+            //// Only Laptop product ta dekhaite cai so tr jonno ei condition/code
+            //List<BaseEquipment> lstEquipment_laptop = new List<BaseEquipment>();
+            //foreach (BaseEquipment obj in lstEquipment)
+            //{
+            //    if (obj.EquipmentName.Contains("Laptop"))
+            //    {
+            //        lstEquipment_laptop.Add(obj);
+            //    }
+            //}
+            //ViewBag.lstEquipment = lstEquipment_laptop;
+
+
+
+            ViewBag.lstEquipment = lstEquipment;
+
+            return View();
+        }
+        [HttpPost]
+        public ActionResult NewEquipmentAssignment(FormCollection frmCol)
+        {
+            BaseEquipment baseEquipment = new BaseEquipment();
+            int returnval =  baseEquipment.SaveEquipmentAssignment(frmCol);
+            if (returnval > 0)
+            {
+                ViewBag.OutMessage = "Operation Completed Successfully";
+                return Redirect(Url.Action("Index", "DashBoard"));
+            }                      
+            ViewBag.OutMessage = "Operation Failed";
+            
+            return View(); 
+        }
+
+
 
 
     }

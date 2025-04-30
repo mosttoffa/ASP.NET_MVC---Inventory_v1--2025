@@ -1,31 +1,33 @@
 ﻿
-@using Inventory_v1.Models         @*Importing the namespace for the BaseEquipment model, Path ta dekhiye deowa hoyese*@
+@using Inventory_v1.Models         @*//Importing the namespace for the BaseEquipment model, Path ta dekhiye deowa hoyese*@
+@using System.Data
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <style>
-    #tblEquipment {
+    #tblEquipment, #tblEquipmentAssignment {
         font-family: Arial, Helvetica, sans-serif;
         border-collapse: collapse;
         width: 100%;
     }
 
-        #tblEquipment td, #tblEquipment th {
+        #tblEquipment td, #tblEquipment th, #tblEquipmentAssignment td, #tblEquipmentAssignment th {
             border: 1px solid #ddd;
             padding: 8px;
         }
 
-        #tblEquipment tr:nth-child(even) {
+        #tblEquipment tr:nth-child(even), #tblEquipmentAssignment tr:nth-child(even) {
             background-color: #f2f2f2;
         }
 
-        #tblEquipment tr:hover {
+        #tblEquipment tr:hover, #tblEquipmentAssignment tr:hover {
             background-color: #ddd;
         }
 
-        #tblEquipment th {
+        #tblEquipment th, #tblEquipmentAssignment th {
             padding-top: 12px;
             padding-bottom: 12px;
             text-align: left;
@@ -49,10 +51,9 @@
 
     function UpdateItem(equipmentid) {
         ShowModal();
-        $('#hdEquipmentID').val(equipmentid);  //Hidden field er value set kora hoyeche
-        $('#btnSubmit').val("Update");  //Button er value set kora hoyeche
+        $('#hdEquipmentID').val(equipmentid);   //Hidden field er value set kora hoyeche
+        $('#btnSubmit').val("Update");          //Button er value set kora hoyeche
     }
-
 
     // Dynamic Part
     function ShowModal() {
@@ -75,7 +76,7 @@
     function HideModal() {
     }
 
-    var OutMessage = "@ViewBag.OutMessage";         @*ViewBag er madhome message ta pass kora hoyeche, jate page ta load holei message ta dekhay*@
+    var OutMessage = "@ViewBag.OutMessage";         //ViewBag er madhome message ta pass kora hoyeche, jate page ta load holei message ta dekhay
     if (OutMessage != "") {
         alert(OutMessage);
         OutMessage = "";
@@ -89,7 +90,7 @@
         <div style="width:100%">
             <div style="height: 30px; background: cornsilk; width: 100%; text-align:center; padding:5px; border-radius:5px;">
                 Equipment List
-                <input type="button" value="new" style="float:right" onclick="ShowModal();$('#btnSubmit').val('Save');" />
+                <input type="button" value="new" style="float:right" onclick="ShowModal();$('#btnSubmit').val('Save');" />      @*//New button to open modal*@
 
             </div>
             <div style="max-height: 400px;  width:100%; overflow:auto">
@@ -133,10 +134,94 @@
     <div class="col col-sm-6">
         <div style="width:100%">
             <div style="height: 30px; background: cornsilk; width: 100%; text-align: center; padding: 5px; border-radius: 5px; ">
-                Caption 2
+                Assignment History
+                <input type="button" value="new" style="float:right" onclick="window.location.href='@Url.Action("NewEquipmentAssignment", "Dashboard")'" />      @*//New button to open modal*@
+
             </div>
             <div style="max-height: 400px;  width:100%; overflow:auto">
-                List 2
+                @{
+                    BaseEquipment baseEquipment = new BaseEquipment();
+                    System.Data.DataTable dt = baseEquipment.ListAssignedEquipment();                       // User assignment show korabo ei section e
+
+                    var dataList = (from p in dt.AsEnumerable()
+                                    select new
+                                    {
+                                        CustomerID = p.Field<Int32>("CustomerID"),
+                                        CustomerName = p.Field<string>("CustomerName"),
+                                        CustomerMobile = p.Field<string>("CustomerMobile"),
+                                        EquipmentName = p.Field<string>("EquipmentName"),
+                                        Assignment = p.Field<Int32>("Assignment")
+                                    }).ToList();
+
+
+
+                }
+
+                <table id="tblEquipmentAssignment" style="width:100%">
+                    <tr>
+                        <th>Update</th>
+                        <th>Delete</th>
+                        <th>CustomerName</th>
+                        <th>CustomerMobile</th>
+                        <th>EquipmentName</th>
+
+                    </tr>
+                    @{
+                        foreach (var objData in dataList)
+                        {
+
+
+                        {
+                            string DisableStr = "";
+                            if (objData.Assignment == 0)
+                            {
+                                DisableStr = "disabled=disabled";
+                            }                         
+                        }
+
+                        <tr>
+                                            @*<td>
+                                                 @{
+                                                    if (objData.Assignment > 0)
+                                                    {
+                                                        <input type="button" value="Update" onclick="AssignmentUpdate(@objData.Assignment)" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <input type="button" value="Update" onclick="AssignmentUpdate(@objData.Assignment)" disabled/>
+
+                                                    }
+                                                }
+                                                </td>
+
+                                                <td>
+                                                    @{
+                                                        if (objData.Assignment > 0)
+                                                        {
+                                                            <input type="button" value="Delete" onclick="AssignmentDelete(@objData.Assignment)" />
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="button" value="Delete" onclick="AssignmentDelete(@objData.Assignment)" disabled />
+
+                                                        }
+                                                    }
+                                                </td>*@     @*// can do this way or we can do another way*@
+
+
+                 <td><input type="button" value="Update" onclick="AssignmentUpdate(@objData.Assignment)" @DisableStr /></td>
+                 <td><input type="button" value="Delete" onclick="AssignmentDelete(@objData.Assignment)" @DisableStr  /></td>
+                 <td>@objData.CustomerName</td>
+                 <td>@objData.CustomerMobile</td>
+                 <td>@objData.EquipmentName</td>
+
+                 </tr>
+                        }
+                    }
+
+
+
+                </table>
             </div>
         </div>
     </div>
