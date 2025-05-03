@@ -141,8 +141,18 @@ namespace Inventory_v1.Controllers
             return View(); 
         }
 
+        public ActionResult ModelTest()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ModelTest(BaseEquipment model)
+        {
+            BaseEquipment dataaa = new BaseEquipment();
+            ModelState.Clear();
+            return View(dataaa);
 
-
+        }
 
     }
 }

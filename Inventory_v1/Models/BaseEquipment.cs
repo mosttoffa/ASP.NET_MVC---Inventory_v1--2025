@@ -46,7 +46,7 @@ namespace Inventory_v1.Models
                 while (reader.Read())
                 {
                     // amra jodi kono kaj korte chai tahole ei block e kaj korbo
-                    BaseEquipment objBaseEquipment = new BaseEquipment();       // base member class er object create kora hoise
+                    BaseEquipment objBaseEquipment = new BaseEquipment();                               // base member class er object create kora hoise
                     objBaseEquipment.EquipmentID = Convert.ToInt32(reader["EquipmentID"].ToString());     // EquipmentID er value set kora hoise
                     objBaseEquipment.EquipmentName = reader["EquipmentName"].ToString();                  // EquipmentName er value set kora hoise
                     objBaseEquipment.Quantity = Convert.ToInt32(reader["Quantity"].ToString());           // Quantity er value set kora hoise
@@ -65,8 +65,6 @@ namespace Inventory_v1.Models
             return ListEquipment;  // username and password admin na hole false return korbe
 
         }
-
-
 
 
         public int SaveEquipment()                              // function er name ValidateMember
@@ -134,7 +132,6 @@ namespace Inventory_v1.Models
             return dataTable;       // username and password admin na hole false return korbe
 
         }
-
 
 
         public int SaveEquipmentAssignment(FormCollection frmCol)                              // function er name ValidateMember
