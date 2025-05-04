@@ -1,8 +1,9 @@
 # Inventory System
 
 # Technology Uses:   
-ASP.NET Web Application (.NET Framework/MVC)
+Language: C#
+ASP.NET Web Application (MVC)
 # Framework Version:      
 .NET Framework 4.8
 
-# This Web App created for Inventory System.
+# This Web App created for Simple Inventory System.
